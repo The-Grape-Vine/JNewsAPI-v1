@@ -1,12 +1,25 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
+}
+
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.3.21'
+    id 'org.jetbrains.dokka' version '0.9.18'
+    id "com.jfrog.bintray" version "1.8.3"
+    id "maven-publish"
 }
+
 
 group 'xyz.thegrapevine'
 version '1.0.0'
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 test {
@@ -26,3 +39,82 @@ compileKotlin {
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
+
+dokka {
+    outputFormat = "html"
+    outputDirectory = "/docs"
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives sourcesJar
+}
+
+
+def pomConfig = {
+    licenses {
+        license {
+            name "The Apache Software License, Version 2.0"
+            url "http://www.apache.org/licenses/LICENSE-2.0.txt"
+            distribution "repo"
+        }
+    }
+    developers {
+        developer {
+            id "thevineyard"
+            name "The Vineyard"
+            email "admin@thegrapevine.xyz"
+        }
+    }
+
+    scm {
+        url "https://github.com/The-Grape-Vine/JNewsAPI"
+    }
+}
+
+publishing {
+    publications {
+        mavenPublication(MavenPublication) {
+            from components.java
+            artifact sourcesJar {
+                classifier "sources"
+            }
+            groupId 'xyz.thegrapevine'
+            artifactId 'JNewsAPI'
+            version '1.0.0'
+            pom.withXml {
+                def root = asNode()
+                root.appendNode('description', 'A Java/Kotlin wrapper for newsapi.org')
+                root.appendNode('name', 'JNewsAPI')
+                root.appendNode('url', 'https://github.com/The-Grape-Vine/JNewsAPI')
+                root.children().last() + pomConfig
+            }
+        }
+    }
+}
+
+bintray {
+    user = System.getProperty('bintray.user')
+    key = System.getProperty('bintray.key')
+    publications = ['mavenPublication']
+
+    pkg {
+        repo = 'JNewsAPI'
+        name = 'JNewsAPI'
+        userOrg = 'thevineyard'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'https://github.com/the-grape-vine/jnewsapi.git'
+        version {
+            name = '1.0.0'
+            desc = '1.0.0'
+            released  = new Date()
+        }
+    }
+
+}
+
+

@@ -5,8 +5,9 @@ import retrofit2.CallAdapter
 import retrofit2.Retrofit
 import java.lang.reflect.Type
 
-
-
+/**
+ * A generic call adapter factory for Retrofit.
+ */
 class CallAdapterFactory : CallAdapter.Factory() {
 
     fun create(): CallAdapterFactory {
