@@ -11,7 +11,15 @@ plugins {
     id 'org.jetbrains.dokka' version '0.9.18'
     id "com.jfrog.bintray" version "1.8.3"
     id "maven-publish"
+    id 'com.gradle.build-scan' version '2.1'
 }
+
+buildScan {
+    termsOfServiceUrl = 'https://gradle.com/terms-of-service'
+    termsOfServiceAgree = 'yes'
+}
+
+
 
 
 group 'xyz.thegrapevine'
