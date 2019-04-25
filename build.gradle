@@ -49,8 +49,19 @@ compileTestKotlin {
 }
 
 dokka {
-    outputFormat = "html"
-    outputDirectory = "/docs"
+    outputFormat = "javadoc"
+    outputDirectory = "docs"
+}
+
+task dokkaJavadoc(type: org.jetbrains.dokka.gradle.DokkaTask) {
+    outputFormat = 'javadoc'
+    outputDirectory = javadoc.destinationDir
+    inputs.dir 'src/main/kotlin'
+}
+
+task javadocJar(type: Jar, dependsOn: dokkaJavadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
@@ -60,6 +71,7 @@ task sourcesJar(type: Jar, dependsOn: classes) {
 
 artifacts {
     archives sourcesJar
+    archives javadocJar
 }
 
 
@@ -90,6 +102,9 @@ publishing {
             from components.java
             artifact sourcesJar {
                 classifier "sources"
+            }
+            artifact javadocJar {
+                classifier "javadoc"
             }
             groupId 'xyz.thegrapevine'
             artifactId 'JNewsAPI'
