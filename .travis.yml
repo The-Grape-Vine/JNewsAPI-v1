@@ -4,5 +4,7 @@ install: true
 jdk:
   - oraclejdk8
 
+before_script:
+  - chmod +x gradlew
 script:
   - ./gradlew test --scan -s
