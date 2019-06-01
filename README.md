@@ -1,5 +1,11 @@
+[![forthebadge](https://forthebadge.com/images/badges/made-with-java.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/kinda-sfw.svg)](https://forthebadge.com)
+[![forthebadge](https://forthebadge.com/images/badges/60-percent-of-the-time-works-every-time.svg)](https://forthebadge.com)
 # JNewsAPI
 This is a wrapper for [NewsAPI.org](https://newsapi.org/), made in Kotlin.
+
+## Documentation
+Docs are provided live at https://docs.thegrapevine.xyz/JNewsAPI.
 
 ## How to Use
 **Resolving the dependency**
