@@ -1,3 +1,5 @@
+[![Download](https://api.bintray.com/packages/thevineyard/JNewsAPI/JNewsAPI/images/download.svg) ](https://bintray.com/thevineyard/JNewsAPI/JNewsAPI/_latestVersion)
+[![Build Status](https://travis-ci.org/The-Grape-Vine/JNewsAPI.svg?branch=master)](https://travis-ci.org/The-Grape-Vine/JNewsAPI)
 [![forthebadge](https://forthebadge.com/images/badges/made-with-java.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/kinda-sfw.svg)](https://forthebadge.com)
 [![forthebadge](https://forthebadge.com/images/badges/60-percent-of-the-time-works-every-time.svg)](https://forthebadge.com)
