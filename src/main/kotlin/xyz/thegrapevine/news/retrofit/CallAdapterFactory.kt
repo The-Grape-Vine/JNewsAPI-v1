@@ -1,5 +1,6 @@
 package xyz.thegrapevine.news.retrofit
 
+import org.slf4j.LoggerFactory
 import retrofit2.Call
 import retrofit2.CallAdapter
 import retrofit2.Retrofit
@@ -9,6 +10,8 @@ import java.lang.reflect.Type
  * A generic call adapter factory for Retrofit.
  */
 class CallAdapterFactory : CallAdapter.Factory() {
+
+    private val LOG = LoggerFactory.getLogger(this::class.java)
 
     fun create(): CallAdapterFactory {
         return CallAdapterFactory()
@@ -23,8 +26,7 @@ class CallAdapterFactory : CallAdapter.Factory() {
                 return try {
                     call.execute().body()
                 } catch (e: Exception) {
-                    println("Error while executing request to ${call.request().url()}")
-                    null
+                    LOG.error("Error while executing request.", e)
                 }
 
             }
